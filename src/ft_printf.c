@@ -19,6 +19,10 @@ int ft_check(va_list args, char str)
     {
         return_value += ft_printstr(va_arg(args, char*));
     }
+    else if(str == 'p')
+    {
+        return_value += ft_hex_convert(va_arg(args, unsigned int));
+    } 
 
     return (return_value);
 }
@@ -53,6 +57,9 @@ int ft_printf(const char *input, ...)
 #include <stdio.h>
 int main()
 {
-    printf("%d", ft_printf("123%c %s", '4', "1234"));
-    /* ft_printf("ilk string: %s, ilk karakter: %c", "selam", 'a'); */
+    char *deneme;
+    deneme = "deneme";
+    /* printf("%d", ft_printf("123%c %s", '4', "1234")); */
+    printf("%p \n", &deneme);
+    ft_printf("%p", &deneme);
 }

@@ -28,11 +28,11 @@ int ft_hex_convert(unsigned long long decimal)
         remainder = quotient % 16;
         if (remainder < 10)
         {
-            write_char[i++] = 48 + remainder;
+            write_char[i++] = '0' + remainder;
         }
         else
         {
-            write_char[i++] = 87 + remainder;
+            write_char[i++] = remainder - 10 + 'a';
         }
         quotient = quotient / 16;
     }
@@ -40,7 +40,7 @@ int ft_hex_convert(unsigned long long decimal)
     {
         write(1, &write_char[i], 1);
     }
-        return (i);
+    return (i);
 }
 /* 
 int main()

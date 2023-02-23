@@ -12,4 +12,5 @@ int ft_print_unsigned(unsigned int n);
 int ft_print_percent();
 int ft_print_ptr(unsigned long long decimal);
 int ft_print_hex(unsigned long long decimal, int key);
+int ft_printf(const char *input, ...);
 #endif

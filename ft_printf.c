@@ -1,5 +1,5 @@
 #include "ft_printf.h"
-#include "../libft/libft.h"
+#include "./libft/libft.h"
 
 int ft_printchar(int c)
 {
@@ -25,9 +25,9 @@ int ft_check(va_list args, char str)
     else if(str == 'u')
         return_value += ft_print_unsigned(va_arg(args, unsigned int));
     else if(str == 'x')
-        return_value += ft_print_hex(va_arg(args,unsigned long long),0);
+        return_value += ft_print_hex(va_arg(args,unsigned long),0);
     else if(str == 'X')
-        return_value += ft_print_hex(va_arg(args,unsigned long long),1);
+        return_value += ft_print_hex(va_arg(args,unsigned long),1);
     else if(str == '%')
         return_value += ft_print_percent();
     return (return_value);

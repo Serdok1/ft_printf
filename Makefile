@@ -1,6 +1,6 @@
 NAME		= libftprintf.a
 LIBFT		= libft
-SRC_DIR		= src/
+SRC_DIR		= ./
 OBJ_DIR		= obj/
 CC			= gcc
 CFLAGS		= -Wall -Werror -Wextra

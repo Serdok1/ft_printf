@@ -1,15 +1,16 @@
 #include "ft_printf.h"
-#include "../libft/libft.h"
+#include "libft/libft.h"
 
 int ft_printstr(char * str)
 {
     int i;
 
     i = 0;
+    if(!str)
+        str = "(null)";
     while(str[i])
     {
-        write(1, &str[i], 1);
-        i++;
+        write(1, &str[i++], 1);
     }
     return (i);
 }
@@ -30,6 +31,11 @@ int ft_ptr_len(int decimal)
 int ft_print_ptr(unsigned long long decimal)
 {
     int i;
+    if (!decimal)
+    {
+        write(1, "0x0", 3);
+        return (3);
+    }
     write(1, "0x", 2);
     i = ft_hex_convert(decimal, ft_ptr_len(decimal), 0);
     i += 2;
@@ -51,7 +57,6 @@ int ft_hex_convert(unsigned long long decimal, int length, int key)
     unsigned long long quotient;
     char write_char[length];
     int j;
-    int k;
     char key_char;
 
     if (key == 1)
@@ -92,7 +97,7 @@ int ft_print_decimal(int decimal)
     i = 0;
     while(converted[i])
         write(1, &converted[i++], 1);
-    i += 1;
+    free(converted);
     return(i);
 }
 
@@ -105,6 +110,7 @@ int ft_print_integer(int integer)
     converted = ft_itoa(integer);
     i = 0;
     while(converted[++i]);
+    free(converted);
     return(i);
 }
 
@@ -117,6 +123,7 @@ int ft_print_unsigned(unsigned int n)
     i = 0;
     while(converted[i])
         write(1, &converted[i++], 1);
+    free(converted);
     return(i);
 }
 

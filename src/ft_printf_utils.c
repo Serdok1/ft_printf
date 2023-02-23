@@ -1,6 +1,6 @@
 #include "ft_printf.h"
 #include "../libft/libft.h"
-#include <stdio.h>
+
 int ft_printstr(char * str)
 {
     int i;
@@ -14,18 +14,54 @@ int ft_printstr(char * str)
     return (i);
 }
 
-int ft_hex_convert(unsigned long long decimal)
+int ft_ptr_len(int decimal)
+{
+    int i;
+
+    i = 0;
+    while (decimal != 0)
+    {
+        decimal /= 16;
+        i++;
+    }
+    return (i);
+}
+
+int ft_print_ptr(unsigned long long decimal)
+{
+    int i;
+    write(1, "0x", 2);
+    i = ft_hex_convert(decimal, ft_ptr_len(decimal), 0);
+    i += 2;
+    return (i);
+}
+
+int ft_print_hex(unsigned long long decimal, int key)
+{
+    int length;
+
+    length = ft_ptr_len(decimal);
+    return (ft_hex_convert(decimal, length, key));
+}
+
+int ft_hex_convert(unsigned long long decimal, int length, int key)
 {
     int i;
     int remainder;
     unsigned long long quotient;
-    char write_char[20];
+    char write_char[length];
     int j;
+    int k;
+    char key_char;
+
+    if (key == 1)
+        key_char = 'A';
+    else
+        key_char = 'a';
 
     quotient = decimal;
     i = 0;
     remainder = 0;
-    write(1, "0x", 2);
     while (quotient != 0)
     {
         remainder = quotient % 16;
@@ -35,7 +71,7 @@ int ft_hex_convert(unsigned long long decimal)
         }
         else
         {
-            write_char[i++] = remainder - 10 + 'a';
+            write_char[i++] = remainder - 10 + key_char;
         }
         quotient = quotient / 16;
     }
@@ -44,7 +80,6 @@ int ft_hex_convert(unsigned long long decimal)
     {
         write(1, &write_char[i], 1);
     }
-    j += 3;
     return (j);
 }
 
@@ -69,7 +104,7 @@ int ft_print_integer(int integer)
     ft_putnbr_fd(integer,1);
     converted = ft_itoa(integer);
     i = 0;
-    while(converted[i++]);
+    while(converted[++i]);
     return(i);
 }
 
@@ -82,6 +117,11 @@ int ft_print_unsigned(unsigned int n)
     i = 0;
     while(converted[i])
         write(1, &converted[i++], 1);
-    i += 1;
     return(i);
+}
+
+int ft_print_percent()
+{
+    write(1, "%", 1);
+    return (1);
 }

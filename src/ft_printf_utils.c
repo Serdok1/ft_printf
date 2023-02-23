@@ -1,4 +1,6 @@
 #include "ft_printf.h"
+#include "../libft/libft.h"
+#include <stdio.h>
 int ft_printstr(char * str)
 {
     int i;
@@ -18,6 +20,7 @@ int ft_hex_convert(unsigned long long decimal)
     int remainder;
     unsigned long long quotient;
     char write_char[20];
+    int j;
 
     quotient = decimal;
     i = 0;
@@ -36,16 +39,49 @@ int ft_hex_convert(unsigned long long decimal)
         }
         quotient = quotient / 16;
     }
+    j = i;
     while(write_char[--i])
     {
         write(1, &write_char[i], 1);
     }
-    return (i);
+    j += 3;
+    return (j);
 }
-/* 
-int main()
+
+int ft_print_decimal(int decimal)
 {
-    char *deneme;
-    deneme = "deneme";
-    ft_hex_convert(1420);
-} */
+    char *converted;
+    int i;
+
+    converted = ft_itoa(decimal);
+    i = 0;
+    while(converted[i])
+        write(1, &converted[i++], 1);
+    i += 1;
+    return(i);
+}
+
+int ft_print_integer(int integer)
+{
+    char *converted;
+    int i;
+
+    ft_putnbr_fd(integer,1);
+    converted = ft_itoa(integer);
+    i = 0;
+    while(converted[i++]);
+    return(i);
+}
+
+int ft_print_unsigned(unsigned int n)
+{
+    char *converted;
+    int i;
+
+    converted = ft_itoa(n);
+    i = 0;
+    while(converted[i])
+        write(1, &converted[i++], 1);
+    i += 1;
+    return(i);
+}

@@ -1,4 +1,5 @@
 #include "ft_printf.h"
+#include "../libft/libft.h"
 
 int ft_printchar(int c)
 {
@@ -21,9 +22,14 @@ int ft_check(va_list args, char str)
     }
     else if(str == 'p')
     {
-        return_value += ft_hex_convert(va_arg(args, unsigned int));
-    } 
-
+        return_value += ft_hex_convert(va_arg(args, unsigned long long));
+    }
+    else if(str == 'd')
+        return_value += ft_print_decimal(va_arg(args, int));
+    else if(str == 'i')
+       return_value += ft_print_integer(va_arg(args, int));
+    else if(str == 'u')
+        return_value += ft_print_unsigned(va_arg(args, unsigned int));
     return (return_value);
 }
 
@@ -57,9 +63,12 @@ int ft_printf(const char *input, ...)
 #include <stdio.h>
 int main()
 {
-    char *deneme;
-    deneme = "deneme";
-    /* printf("%d", ft_printf("123%c %s", '4', "1234")); */
-    printf("%p \n", &deneme);
-    ft_printf("%p", &deneme);
+    int a;
+
+    a = 123123123;
+    char *ptr;
+    ptr = "deneme";
+    int pr = printf("%u \n", a);
+    int ft = ft_printf("%u\n", a);
+    printf("pr: %d, ft: %d\n", pr, ft);
 }

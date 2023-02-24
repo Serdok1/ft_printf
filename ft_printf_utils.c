@@ -28,7 +28,7 @@ int ft_ptr_len(int decimal)
     return (i);
 }
 
-int ft_print_ptr(unsigned long long decimal)
+int ft_print_ptr(unsigned long decimal)
 {
     int i;
     if (!decimal)
@@ -42,7 +42,7 @@ int ft_print_ptr(unsigned long long decimal)
     return (i);
 }
 
-int ft_print_hex(unsigned long long decimal, int key)
+int ft_print_hex(unsigned int decimal, int key)
 {
     int length;
 
@@ -50,7 +50,7 @@ int ft_print_hex(unsigned long long decimal, int key)
     return (ft_hex_convert(decimal, length, key));
 }
 
-int ft_hex_convert(unsigned long long decimal, int length, int key)
+int ft_hex_convert(unsigned long decimal, int length, int key)
 {
     int i;
     int remainder;
@@ -67,6 +67,11 @@ int ft_hex_convert(unsigned long long decimal, int length, int key)
     quotient = decimal;
     i = 0;
     remainder = 0;
+    if(quotient == 0)
+    {
+        write(1, "0", 1);
+        return(1);
+    }
     while (quotient != 0)
     {
         remainder = quotient % 16;
@@ -116,19 +121,55 @@ int ft_print_integer(int integer)
 
 int ft_print_unsigned(unsigned int n)
 {
-    char *converted;
-    int i;
+    int		print_length;
+	char	*num;
 
-    converted = ft_itoa(n);
-    i = 0;
-    while(converted[i])
-        write(1, &converted[i++], 1);
-    free(converted);
-    return(i);
+	print_length = 0;
+	if (n == 0)
+		print_length += write(1, "0", 1);
+	else
+	{
+		num = ft_uitoa(n);
+		print_length += ft_printstr(num);
+		free(num);
+	}
+	return (print_length);
 }
 
 int ft_print_percent()
 {
     write(1, "%", 1);
     return (1);
+}
+
+int	ft_num_len(unsigned	int num)
+{
+	int	len;
+
+	len = 0;
+	while (num != 0)
+	{
+		len++;
+		num = num / 10;
+	}
+	return (len);
+}
+
+char	*ft_uitoa(unsigned int n)
+{
+	char	*num;
+	int		len;
+
+	len = ft_num_len(n);
+	num = (char *)malloc(sizeof(char) * (len + 1));
+	if (!num)
+		return (0);
+	num[len] = '\0';
+	while (n != 0)
+	{
+		num[len - 1] = n % 10 + 48;
+		n = n / 10;
+		len--;
+	}
+	return (num);
 }

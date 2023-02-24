@@ -17,7 +17,7 @@ int ft_check(va_list args, char str)
     else if(str == 's')
         return_value += ft_printstr(va_arg(args, char*));
     else if(str == 'p')
-        return_value += ft_print_ptr(va_arg(args, unsigned long long));
+        return_value += ft_print_ptr(va_arg(args, unsigned long));
     else if(str == 'd')
         return_value += ft_print_decimal(va_arg(args, int));
     else if(str == 'i')
@@ -25,9 +25,9 @@ int ft_check(va_list args, char str)
     else if(str == 'u')
         return_value += ft_print_unsigned(va_arg(args, unsigned int));
     else if(str == 'x')
-        return_value += ft_print_hex(va_arg(args,unsigned long),0);
+        return_value += ft_print_hex(va_arg(args,unsigned int),0);
     else if(str == 'X')
-        return_value += ft_print_hex(va_arg(args,unsigned long),1);
+        return_value += ft_print_hex(va_arg(args,unsigned int),1);
     else if(str == '%')
         return_value += ft_print_percent();
     return (return_value);
@@ -59,8 +59,8 @@ int ft_printf(const char *input, ...)
     va_end(ptr);
     return (return_value);
 }
-
-/* #include <stdio.h>
+/* 
+#include <stdio.h>
 int main()
 {
     int a;
@@ -68,8 +68,7 @@ int main()
     a = 123123123;
     char *ptr;
     ptr = "deneme";
-    int pr = printf("%% %X\n", a);
-    int ft = ft_printf("%% %X\n", a);
+    int pr = printf("pr: %x ", 9223372036854775807);
+    int ft = ft_printf("ft: %x ", 9223372036854775807);
     printf("pr: %d, ft: %d\n", pr, ft);
-}
- */
+} */

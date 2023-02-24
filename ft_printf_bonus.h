@@ -1,5 +1,5 @@
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#ifndef FT_PRINTF_BONUS_H
+# define FT_PRINTF_BONUS_H
 
 # include <stdarg.h>
 # include <unistd.h>
@@ -15,5 +15,6 @@ int ft_print_hex(unsigned int decimal, int key);
 int ft_printf(const char *input, ...);
 char	*ft_uitoa(unsigned int n);
 int	ft_num_len(unsigned	int num);
+int ft_print_blank(int d);
 
 #endif

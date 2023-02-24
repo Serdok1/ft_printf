@@ -18,6 +18,7 @@ CYAN = \033[0;96m
 WHITE = \033[0;97m
 
 SRC_FILES	=	ft_printf ft_printf_utils
+BONUS_DIR 	=	ft_printf_bonus ft_printf_utils_bonus
 
 SRC 		= 	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJ 		= 	$(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
@@ -34,6 +35,22 @@ $(NAME):	$(OBJ)
 			@echo "$(GREEN)ft_printf compiled!$(DEF_COLOR)"
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJF)
+			@echo "$(YELLOW)Compiling: $< $(DEF_COLOR)"
+			@$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJF):
+			@mkdir -p $(OBJ_DIR)
+
+bonus:		$(NAME)
+
+$(NAME):	$(OBJ)
+			@make -C $(LIBFT)
+			@cp libft/libft.a .
+			@mv libft.a $(NAME)
+			@$(AR) $(NAME) $(OBJ)
+			@echo "$(GREEN)ft_printf compiled!$(DEF_COLOR)"
+
+$(OBJ_DIR)%.o: $(BONUS_DIR)%.c | $(OBJF)
 			@echo "$(YELLOW)Compiling: $< $(DEF_COLOR)"
 			@$(CC) $(CFLAGS) -c $< -o $@
 

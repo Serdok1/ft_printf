@@ -4,10 +4,12 @@
 int ft_print_blank(int d)
 {
     int return_value;
-    if(d > 0)
+    return_value = 0;
+    if(d >= 0)
     {
         write(1, " ", 1);
-        return_value = ft_print_integer(d);
+        return_value += ft_print_integer(d);
+        return_value += 1;
         return (return_value);
     }
     return_value = ft_print_integer(d);

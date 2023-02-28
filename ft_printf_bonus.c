@@ -8,11 +8,13 @@ int ft_printchar(int c)
     return (1);
 }
 
-int ft_check(va_list args, char str, int i, const char *full)
+int ft_check(va_list args, char str, int *i, const char *full)
 {
     int return_value;
+    int temp;
 
     return_value = 0;
+    temp = 0;
     if(str == 'c')
         return_value += ft_printchar(va_arg(args, int));
     else if(str == 's')
@@ -33,9 +35,18 @@ int ft_check(va_list args, char str, int i, const char *full)
         return_value += ft_print_percent();
     else if(str == ' ')
     {
-        if(full[i + 2] == 'd' || full[i + 2] == 'i')
+        if(full[*i + 2] == 'd' || full[*i + 2] == 'i')
         {
             return_value += ft_print_blank(va_arg(args, int));
+            (*i)++;
+        }
+        else if(full[*i + 2] == 's')
+        { 
+            temp = ft_printstr(va_arg(args, char*));
+            /* printf("temp: %d", temp); */
+            return_value += temp;
+            temp += 1;
+            *i += temp;
         }
     }
     return (return_value);
@@ -54,18 +65,8 @@ int ft_printf(const char *input, ...)
     {
         if(input[i] == '%')
         {
-            return_value += ft_check(ptr, input[i + 1], i, input);
+            return_value += ft_check(ptr, input[i + 1], &i, input);
             i++;
-        }
-        else if(input[i] == 'd' || input[i] == 'i')
-        {
-            if(input[i - 1] == ' ')
-            {
-                if(input[i - 2] == '%')
-                {
-                    i++;
-                }
-            }
         }
         else
         {
@@ -78,7 +79,7 @@ int ft_printf(const char *input, ...)
     return (return_value);
 }
 
-#include <stdio.h>
+/* #include <stdio.h>
 int main()
 {
     int a;
@@ -89,4 +90,4 @@ int main()
     int pr = printf(" % d ", 1);
     int ft = ft_printf(" % d ", 1);
     printf("pr: %d, ft: %d\n", pr, ft);
-}
+} */

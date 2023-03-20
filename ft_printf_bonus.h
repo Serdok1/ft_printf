@@ -4,6 +4,17 @@
 # include <stdarg.h>
 # include <unistd.h>
 
+typedef struct s_format
+{
+	int		minus;
+	int		plus;
+	int		zero;
+	int		dot;
+	int		space;
+	int		sharp;
+}			t_format;
+#define SPECIFIERS = "cspdiuxX%";
+
 int ft_printstr(char * str);
 int ft_hex_convert(unsigned long decimal, int length, int key);
 int ft_print_decimal(int decimal);

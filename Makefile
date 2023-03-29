@@ -17,7 +17,7 @@ MAGENTA = \033[0;95m
 CYAN = \033[0;96m
 WHITE = \033[0;97m
 
-SRC_FILES	=	ft_printf ft_printf_utils
+SRC_FILES	=	ft_printf ft_printf_utils ft_printf_utils_long ft_printf_utils_two
 BONUS_FILES =	ft_printf_bonus ft_printf_utils_bonus
 
 SRC 		= 	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
